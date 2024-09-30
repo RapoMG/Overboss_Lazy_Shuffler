@@ -10,7 +10,7 @@ class Terrain:
         self.terr_points = terr_points
         self.tiles = []  # list of tiles
 
-    def create_tile(self, tile_id, value=""):  # do I need it?
+    def create_tile(self, tile_id, value=""):
         """**tile_id** suposed stand for individual number of tile.\n
         **value** represents aditional points for that specific tile, if there is one. For now, it is string.
          """

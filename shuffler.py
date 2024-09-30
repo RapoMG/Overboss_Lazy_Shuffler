@@ -32,6 +32,7 @@ def show_drawed(terr_list):  # list of terrain
 
 
 def univ_show_drawed(terr_list):  # list of terrain
+    # Probably it should be part of interface
     """**RENAME IT!**\n
     Creating question listing terraint types that will be in play.
     :param terr_list: *list* of terrain objects.
@@ -49,8 +50,11 @@ def univ_show_drawed(terr_list):  # list of terrain
         tab = max_name - len(terr_list[i].name) + 1
         d.update({i + 1: f'{terr_list[i].name}{":": <{tab}} {terr_list[i].terr_points}'})
 
-    s = ''
-    a = [s, d]
+    # s = ''
+    # a = [s, d]
+
+    # simpler
+    a = ['', d]  # [fake question, dict of lines "name -  points"]
 
     return a
 

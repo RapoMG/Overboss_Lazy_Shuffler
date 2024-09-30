@@ -1,7 +1,7 @@
 from terrain import Terrain
 
 
-class MainColection:  # def?
+class MainColection:
     """Creation of Terrain types and it's tile sets"""
 
     # Terrain creation
@@ -16,7 +16,7 @@ class MainColection:  # def?
         Terrain('Cloud Island', '7 -≠1'),
         Terrain('Desert', '0/2/6/12/20'),
         Terrain('Summoning Circle', '1'),
-        Terrain('Vulcano', '4')
+        Terrain('Vulcano', '4'),
     ]
 
     # Tiles creation

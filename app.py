@@ -27,77 +27,78 @@ def menu():
         opt = opt.lower()
 
         if opt == '1':  # Draw terrains
-
-            # Draw terrain
-            draw = shu.drawing()
-            # Show what was drawed
-            clean()
-            inter.logo()
-
-            inter.question_menu(shu.univ_show_drawed(draw))
-
-            # Ask to play with it
-            inter.question_menu(inter.accept_terrnain)
-            aff = input(IPT)
-            if aff.lower() == 'y':
-                # Here: start play
-                """ Check function play() --> send draw?"""
-                play(draw)
-            else:
-                continue
+            draw_terrain()
 
         elif opt == '2':  # chose terrain
-
-            # Choose terrain
-            choose = components.MainColection().categories.copy()
-            choose.pop(0)  # remove Dungeon
-
-            draw = []
-
-            while len(draw) < 5:
-                clean()
-                inter.logo()
-                inter.question_menu(shu.univ_show_drawed(choose))
-                inter.question_menu(shu.univ_show_drawed(draw))
-                aff = input(IPT)
-                draw.append(choose.pop(int(aff)-1))  # insert position in list
-
-            # Ask to play with it (second time. create function?)
-            clean()
-            inter.logo()
-            inter.question_menu(shu.univ_show_drawed(draw))
-            inter.question_menu(inter.accept_terrnain)
-            aff = input(IPT)
-            if aff.lower() == 'y':
-                # Start play
-                play(draw)
-            else:
-                continue
+            choose_terrain()
 
         elif opt == '3':  # bassic terrain
+            basic_terrain()
 
-            # Basic terrain
-            draw = []
-            for i in range(1, 6):  # skip Dungeon
-                draw.append(components.MainColection().categories[i])
-
-            clean()
-            inter.logo()
-            inter.question_menu(shu.univ_show_drawed(draw))
-
-            # Ask to play with it
-            inter.question_menu(inter.accept_terrnain)
-
-            aff = input(IPT)
-            if aff.lower() == 'y':
-                # Start play
-                play(draw)
-            else:
-                continue
         elif opt == 'q' or opt == 'e':
             break
         else:
             continue
+
+
+def draw_terrain():
+    # Draw terrain
+    draw = shu.drawing()
+
+    # Show what was drawed
+    confirmation(draw)
+
+
+def choose_terrain():
+    # Choose terrain
+    choose = components.MainColection().categories.copy()
+    dungeon = choose.pop(0)  # remove Dungeon
+
+    draw = []
+
+    while len(draw) < 5:
+        clean()
+        inter.logo()
+        inter.question_menu(shu.univ_show_drawed(choose))
+        inter.question_menu(shu.univ_show_drawed(draw))
+        aff = input(IPT)
+        draw.append(choose.pop(int(aff) - 1))  # insert position in list
+    # Return Dungeon
+    draw.insert(0, dungeon)
+
+    # Ask to play with it
+    confirmation(draw)
+
+
+def basic_terrain():
+    # Basic terrain
+    draw = []
+    for i in range(1, 6):  # skip Dungeon
+        draw.append(components.MainColection().categories[i])
+
+    confirmation(draw)
+
+
+def confirmation(final):
+    """Confirmation of use of chosen or drawed terrain types. User start the game or leave to main menu.
+    :param final: **list** of Terrain objects that be used in game. """
+    while True:
+        # Top
+        clean()
+        inter.logo()
+
+        # Display choosen terrain
+        inter.question_menu(shu.univ_show_drawed(final))
+
+        # Ask to play with it
+        inter.question_menu(inter.accept_terrnain)
+        aff = input(IPT)
+        if aff.lower() == 'y':
+            # Start game
+            play(final)
+            break
+        elif aff.lower() == 'n':
+            break
 
 
 def play(terrain_in_play):  # add chosen terrains? (draw variable)
@@ -161,7 +162,3 @@ def play(terrain_in_play):  # add chosen terrains? (draw variable)
 
         if end:
             break
-
-
-# Run app
-menu()
